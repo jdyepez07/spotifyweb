@@ -1,0 +1,13 @@
+// Importa solo lo que necesites de Bulma
+@use "bulma/bulma";
+
+$primary: #ff5733;  // Personaliza el color principal
+
+body {
+  background-color: $primary;
+}
+
+.button {
+  @extend .button;
+  font-size: 18px;
+}
