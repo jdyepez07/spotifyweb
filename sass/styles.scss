@@ -1,2 +1,152 @@
 //@use "../node_modules/bulma/bulma.scss";
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+
+$glass-color: rgba(255, 255, 255, 0.1);
+$blur-amount: 10px;
+$border-radius: 15px;
+$menu-title-color: #f8f8f8;
+$shadow-light: rgba(255, 255, 255, 0.6);
+$shadow-dark: rgba(163, 177, 198, 0.8);
+//Mixin es para aplicar los estilos basicos del glassmorphism en todos lo demas
+
+@mixin glassmorphism {
+    background: $glass-color;
+    backdrop-filter: blur($blur-amount);
+    border-radius: $border-radius;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    //box-shadow: 6px 6px 12px $shadow-dark, -6px -6px 12px $shadow-light;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    @include glassmorphism;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; 
+    margin: 0 2rem;
+}
+
+.search-bar {
+    @include glassmorphism;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem; // Más padding horizontal
+    width: 100%; // Ancho completo del contenedor
+    max-width: 600px; // Ancho máximo de la barra de búsqueda
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+
+.layout {
+    display: flex;
+    flex-grow: 1;
+    gap: 2rem;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 1rem;
+  }
+}
+
+.menu {
+  @include glassmorphism;
+  padding: 1rem;
+  width: 200px;
+
+  @media (max-width: 768px) {
+    width: 100%; // Menú ocupa todo el ancho en móviles
+    display: none; // Oculto por defecto en móviles
+    &.is-active {
+        display: block; // Visible cuando se activa
+    }
+  }
+
+  .menu-title {
+      color: $menu-title-color;
+      font-weight: bold; 
+  }
+  border-radius: 20px;
+  ul.menu-list {
+      li {
+          margin-bottom: 1rem;
+          
+          a {
+              color: white;
+              border-radius: 8px;
+              &:hover {
+                box-shadow: inset 6px 6px 12px $shadow-dark, inset -6px -6px 12px $shadow-light;
+              }
+              &.is-active {
+                  background: rgba(255, 255, 255, 0.2);
+              }
+          }
+      }
+  }
+}
+
+.video-section {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 768px) {
+      padding: 1rem;
+  }
+}
+
+.video-card {
+    @include glassmorphism;
+    padding: 1rem;
+    max-width: 800px; // Ancho máximo del video
+    width: 100%;
+    video {
+        width: 100%;
+        border-radius: $border-radius;
+    }
+    .video-info {
+        margin-top: 1rem;
+        h3, p {
+            margin: 0;
+        }
+    }
+}
+
+.player-bar {
+    @include glassmorphism;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
