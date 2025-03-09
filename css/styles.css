@@ -21580,6 +21580,40 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+.navbar .navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .navbar .navbar-toggle {
+    display: block;
+  }
+}
+.navbar .navbar-menu {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .navbar .navbar-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem;
+  }
+  .navbar .navbar-menu.is-active {
+    display: flex;
+  }
+}
 
 .search-container {
   flex-grow: 1;
@@ -21629,6 +21663,13 @@ body {
   .menu {
     width: 100%;
     display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem;
   }
   .menu.is-active {
     display: block;
@@ -21657,10 +21698,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 }
 @media (max-width: 768px) {
   .video-section {
-    padding: 1rem;
+    flex-direction: column;
+    padding: 0.5rem;
   }
 }
 
@@ -21674,9 +21717,27 @@ body {
   max-width: 800px;
   width: 100%;
 }
-.video-card video {
+@media (max-width: 768px) {
+  .video-card {
+    max-width: 100%;
+  }
+}
+.video-card .player {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   width: 100%;
-  border-radius: 15px;
+  background-color: black;
+}
+.video-card .player #player {
+  width: 100%;
+  height: 450px;
+}
+@media (max-width: 768px) {
+  .video-card .player #player {
+    height: 300px;
+  }
 }
 .video-card .video-info {
   margin-top: 1rem;
@@ -21686,55 +21747,6 @@ body {
   margin: 0;
 }
 
-#tituloVideo {
-  font-size: 20px;
-}
-
-#descripcionVideo {
-  font-size: 10px;
-}
-
-.player {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  background-color: black;
-}
-
-#player {
-  width: 80%;
-  max-width: 800px;
-  height: 450px;
-}
-
-.video-list ul {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  padding: 0;
-}
-.video-list li {
-  list-style: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 10px;
-  border-radius: 5px;
-  transition: background 0.3s;
-}
-.video-list li:hover {
-  background: #d7cbcb;
-}
-.video-list li img.thumbnail {
-  width: 200px;
-  height: auto;
-  border-radius: 5px;
-}
-
 .player-bar {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -21742,10 +21754,14 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   position: fixed;
-  bottom: 0%;
+  bottom: 0;
   left: 50%;
+  transform: translateX(-50%);
   padding: 1rem;
   gap: 1rem;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
 }
 .player-bar button {
   background: none;
@@ -21762,17 +21778,19 @@ body {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-  transform: none !important;
+  margin-bottom: 80px;
 }
 .carousel .carousel-inner {
   display: flex;
   align-items: center;
   height: 500px;
-  border-radius: 15px;
+}
+@media (max-width: 768px) {
+  .carousel .carousel-inner {
+    height: 300px;
+  }
 }
 .carousel .carousel-item {
-  transform: none !important;
-  transition: none !important;
   height: 100%;
   width: 100%;
 }
@@ -21780,10 +21798,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: none !important;
-}
-.carousel .carousel-item.active img {
-  filter: brightness(100%);
 }
 .carousel .carousel-caption {
   background: rgba(255, 255, 255, 0.1);
@@ -21796,7 +21810,6 @@ body {
   border-radius: 10px;
   color: white;
   text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
-  animation: fadeInUp 0.8s ease-in-out;
 }
 .carousel .carousel-caption h5 {
   font-size: 1.5rem;
