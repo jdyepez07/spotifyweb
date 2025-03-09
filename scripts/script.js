@@ -1,6 +1,7 @@
 let player;
+let isPlaying = false;
 const videos = [
-    { id: 'M7lc1UVf-VE', title: 'Video de prueba', description: 'Descripcion de video de prueba'},
+    { id: 'M7lc1UVf-VE', title: 'Video de prueba', description: 'Descripcion de video de prueba' },
     { id: 'K4TOrB7at0Y', title: 'Explorando el espacio', description: 'Como explorar el espacio en un taxi' },
     { id: '3JZ_D3ELwOQ', title: 'Cómo aprender JavaScript', description: 'Enseñamos javascript a estudiantes de arquitectura' },
     { id: 'oMvVOMwr6o8', title: 'Parta y la choke', description: 'que la parta y la chokeeeeeeeeeeeeeeeeeee' },
@@ -18,11 +19,11 @@ function onYouTubeIframeAPIReady() {
             'onStateChange': onPlayerStateChange
         },
         playerVars: {
-            autoplay: 1,  
+            autoplay: 1,
             controls: 2,
         }
     });
-    
+
     document.getElementById("playPauseBtn").addEventListener("click", togglePlayPause);
     document.getElementById("tituloVideo").innerText = videos[0].title;
     document.getElementById("descripcionVideo").innerText = videos[0].description;
@@ -108,7 +109,6 @@ function generarCarruselVideos() {
     });
 }
 
-
 // Cambiar el video en el reproductor
 function cargarVideo(videoId) {
     player.loadVideoById(videoId);
@@ -135,7 +135,7 @@ function getCurrentTime() {
 
 function seekToSecond(seconds, option) {
     let new_time;
-    if (option == 1){
+    if (option == 1) {
         new_time = player.getCurrentTime() - seconds;
     } else {
         new_time = player.getCurrentTime() + seconds;
@@ -147,7 +147,7 @@ function changeVideo(option) {
     let video_id = player.getVideoData().video_id;
     let posicion = videos.findIndex(obj => obj.id === video_id);
     let new_pos = posicion + (option === 2 ? 1 : -1);
-    
+
     if (new_pos >= 0 && new_pos < videos.length) {
         let new_id = videos[new_pos].id;
         player.loadVideoById(new_id);
@@ -156,8 +156,23 @@ function changeVideo(option) {
     }
 }
 
-
 function activarTitulo(elemento) {
     let tituloActual = elemento.innerText;
-    document.getElementById("tituloVideos"). innerText = tituloActual;
+    document.getElementById("tituloVideos").innerText = tituloActual;
 }
+
+function toggleMenu() {
+    const navbarMenu = document.getElementById('navbarMenu');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+    navbarMenu.classList.toggle('is-active');
+    sidebarMenu.classList.toggle('is-active');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const navbarToggle = document.querySelector('.navbar-toggle');
+    const menu = document.querySelector('.menu');
+
+    navbarToggle.addEventListener('click', function () {
+        menu.classList.toggle('is-active');
+    });
+});
